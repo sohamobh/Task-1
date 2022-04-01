@@ -4,6 +4,7 @@ import displaySlice from "features/display/displaySlice"
 export const store = configureStore({
     reducer: {
         display: displaySlice,
+        edit: displaySlice,
     },
 })
 export type RootState = ReturnType<typeof store.getState>

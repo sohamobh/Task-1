@@ -7,11 +7,20 @@ export interface DisplayInitialState {
         desc: string
         status: string
     }[]
+    editData: {
+        id: number
+        email: string
+        title: string
+        desc: string
+        status: string
+    }[]
 }
 
 const initialState: DisplayInitialState = {
     tableData: [],
+    editData: [],
 }
+
 export const displaySlice = createSlice({
     name: "display",
     initialState,
@@ -21,7 +30,11 @@ export const displaySlice = createSlice({
 
             state.tableData.push(action.payload)
         },
+        edit: (state, action) => {
+            console.log(action)
+            state.editData.push(action.payload)
+        },
     },
 })
-export const { display } = displaySlice.actions
+export const { display, edit } = displaySlice.actions
 export default displaySlice.reducer
