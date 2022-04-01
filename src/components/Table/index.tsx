@@ -10,11 +10,9 @@ import {
     Box,
 } from "@chakra-ui/react"
 
-import { RootState } from "../../app/store"
 import { useSelector } from "react-redux"
 
-import { formDataSelector } from "../../features/display/displaySelector"
-import { display } from "../../features/display/displaySlice"
+import { formDataSelector } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/features/display/displaySelector"
 
 const IndexTable: React.FC = () => {
     const tableData = useSelector(formDataSelector)
