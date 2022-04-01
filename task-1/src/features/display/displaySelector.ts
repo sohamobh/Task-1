@@ -6,5 +6,5 @@ const selectDisplay = (state: RootState) => state.display
 
 export const formDataSelector = createSelector(
     selectDisplay,
-    (state: DisplayInitialState) => state.todoFormSubmissionValue
+    (state: DisplayInitialState) => state.tableData
 )

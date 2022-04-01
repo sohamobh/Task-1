@@ -8,24 +8,24 @@ import {
     Td,
     TableContainer,
     Box,
-    filter,
 } from "@chakra-ui/react"
+
 import { useSelector } from "react-redux"
-import { RootState } from "../../app/store"
-import { formDataSelector } from "../../features/display/displaySelector"
-import { DisplayInitialState } from "../../features/display/displaySlice"
+
+import { formDataSelector } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/features/display/displaySelector"
 
 const IndexTable: React.FC = () => {
-    // const handleDelete=(id: number)=>{
-    //     (state: DisplayInitialState) => state.todoFormSubmissionValue;
-    //     ((state: RootState)=>state.id!==id)
-    // }
+    const tableData = useSelector(formDataSelector)
 
-    const todoFormSubmissionValue = useSelector(formDataSelector)
+    console.log({ tableData }, "hiiiiiiiii")
+
+    tableData.map((tableData) => {
+        console.log(tableData)
+    })
 
     return (
         <>
-            {todoFormSubmissionValue?.email && (
+            <span>
                 <Box display="flex" overflow="hidden" width="100%">
                     <TableContainer height="fit-content" width="100%">
                         <Table size="lg">
@@ -39,44 +39,47 @@ const IndexTable: React.FC = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                <Tr>
-                                    <Td>{todoFormSubmissionValue.email}</Td>
-                                    <Td>{todoFormSubmissionValue.title}</Td>
-                                    <Td>{todoFormSubmissionValue.desc}</Td>
-                                    <Td>{todoFormSubmissionValue.status}</Td>
+                                {tableData.map((tableData) => {
+                                    return (
+                                        <Tr>
+                                            <Td>{tableData.email}</Td>
+                                            <Td>{tableData.title}</Td>
+                                            <Td>{tableData.desc}</Td>
+                                            <Td>{tableData.status}</Td>
 
-                                    <Td>
-                                        <Box
-                                            as="button"
-                                            borderRadius="md"
-                                            bg="teal"
-                                            color="white"
-                                            px={4}
-                                            h={12}
-                                            alignItems="center"
-                                            marginRight={4}
-                                        >
-                                            <EditIcon w={5} h={5} />
-                                        </Box>
-                                        <Box
-                                            as="button"
-                                            borderRadius="md"
-                                            bg="teal"
-                                            color="white"
-                                            px={4}
-                                            h={12}
-                                            alignItems="center"
-                                            // onClick={()=handleDelete(id)}
-                                        >
-                                            <DeleteIcon w={5} h={5} />
-                                        </Box>
-                                    </Td>
-                                </Tr>
+                                            <Td>
+                                                <Box
+                                                    as="button"
+                                                    borderRadius="md"
+                                                    bg="teal"
+                                                    color="white"
+                                                    px={4}
+                                                    h={12}
+                                                    alignItems="center"
+                                                    marginRight={4}
+                                                >
+                                                    <EditIcon w={5} h={5} />
+                                                </Box>
+                                                <Box
+                                                    as="button"
+                                                    borderRadius="md"
+                                                    bg="teal"
+                                                    color="white"
+                                                    px={4}
+                                                    h={12}
+                                                    alignItems="center"
+                                                >
+                                                    <DeleteIcon w={5} h={5} />
+                                                </Box>
+                                            </Td>
+                                        </Tr>
+                                    )
+                                })}
                             </Tbody>
                         </Table>
                     </TableContainer>
                 </Box>
-            )}
+            </span>
         </>
     )
 }

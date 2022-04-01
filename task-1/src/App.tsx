@@ -1,16 +1,18 @@
-import IndexForm from "./components/Form/index"
-import IndexTable from "./components/Table"
+import { ChakraProvider } from "@chakra-ui/react"
+import { Provider } from "react-redux"
 
-import "./style.css"
-import "./App.css"
+import { store } from "./app/store"
+
+import Components from "./pages/ComponentsCombine"
 
 const App = () => {
     return (
         <>
-            <div className="main">
-                <IndexForm />
-                <IndexTable />
-            </div>
+            <Provider store={store}>
+                <ChakraProvider>
+                    <Components />
+                </ChakraProvider>
+            </Provider>
         </>
     )
 }

@@ -1,33 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface DisplayInitialState {
-    todoFormSubmissionValue: SubmitData
-    id: number
-}
-
-interface SubmitData {
-    email: string
-    title: string
-    desc: string
-    status: string
+    tableData: {
+        email: string
+        title: string
+        desc: string
+        status: string
+    }[]
 }
 
 const initialState: DisplayInitialState = {
-    todoFormSubmissionValue: {
-        email: "",
-        title: "",
-        desc: "",
-        status: "",
-    },
-    id: 0,
+    tableData: [],
 }
 export const displaySlice = createSlice({
     name: "display",
     initialState,
     reducers: {
         display: (state, action) => {
-            console.log({ state, Ac: action.payload })
-            state.todoFormSubmissionValue = action.payload
+            console.log(action)
+
+            state.tableData.push(action.payload)
         },
     },
 })
