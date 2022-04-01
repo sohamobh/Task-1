@@ -1,9 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react"
+import { store } from "app/store"
 import { Provider } from "react-redux"
 
-import { store } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/app/store"
-
-import Components from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/pages/ComponentsCombine"
+import Components from "pages/ComponentsCombine"
 
 const App = () => {
     return (

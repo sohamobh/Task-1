@@ -12,16 +12,10 @@ import {
 
 import { useSelector } from "react-redux"
 
-import { formDataSelector } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/features/display/displaySelector"
+import { formDataSelector } from "features/display/displaySelector"
 
 const IndexTable: React.FC = () => {
     const tableData = useSelector(formDataSelector)
-
-    console.log({ tableData }, "hiiiiiiiii")
-
-    tableData.map((tableData) => {
-        console.log(tableData)
-    })
 
     return (
         <>

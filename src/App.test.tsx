@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react"
-
-import App from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/App"
+import App from "App"
 
 test("renders learn react link", () => {
     render(<App />)
