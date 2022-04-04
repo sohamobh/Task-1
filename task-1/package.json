@@ -18,12 +18,15 @@
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "framer-motion": "^6",
+    "node-modules": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
+    "react-uuid": "^1.0.2",
     "typescript": "^4.4.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"
   },
@@ -50,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
   }
 }

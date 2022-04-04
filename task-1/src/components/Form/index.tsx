@@ -14,9 +14,9 @@ import {
 import { useFormik } from "formik"
 import { useDispatch } from "react-redux"
 
-import { display } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/features/display/displaySlice"
+import { display } from "features/display/displaySlice"
 
-import TodoValidationSchema from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/Validation"
+import TodoValidationSchema from "Validation"
 
 const IndexForm: React.FC = () => {
     const dispatch = useDispatch()

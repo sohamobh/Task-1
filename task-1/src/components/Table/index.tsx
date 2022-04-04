@@ -8,20 +8,53 @@ import {
     Td,
     TableContainer,
     Box,
+    Input,
 } from "@chakra-ui/react"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-import { formDataSelector } from "/home/webelight-047/Desktop/Soha/Task-1/task-1/src/features/display/displaySelector"
+import { formDataSelector } from "features/display/displaySelector"
+import { useState } from "react"
+import TodoValidationSchema from "Validation"
+import { useFormik } from "formik"
+import { display } from "features/display/displaySlice"
 
 const IndexTable: React.FC = () => {
+    const dispatch = useDispatch()
+    const { touched, errors, setFieldValue, values, handleSubmit, resetForm } =
+        useFormik({
+            initialValues: {
+                email: "",
+                title: "",
+                desc: "",
+                status: "",
+            },
+            validationSchema: TodoValidationSchema,
+            onSubmit: (values) => {
+                dispatch(
+                    display({
+                        email: values.email,
+                        title: values.title,
+                        desc: values.desc,
+                        status: values.status,
+                    })
+                )
+
+                if (values) {
+                    resetForm()
+                    console.log("clear")
+                }
+                // alert(JSON.stringify(values, null, 2))
+            },
+        })
+    console.log({ errors, touched })
+    const [edit, setEdit] = useState<boolean>(false)
+    const [editData, setEditData] = useState<object>({})
+
     const tableData = useSelector(formDataSelector)
-
-    console.log({ tableData }, "hiiiiiiiii")
-
-    tableData.map((tableData) => {
-        console.log(tableData)
-    })
+    const handleDelete = () => {
+        alert("delete is clicked using fucntion")
+    }
 
     return (
         <>
@@ -57,6 +90,9 @@ const IndexTable: React.FC = () => {
                                                     h={12}
                                                     alignItems="center"
                                                     marginRight={4}
+                                                    onClick={() => {
+                                                        alert("edit is clicked")
+                                                    }}
                                                 >
                                                     <EditIcon w={5} h={5} />
                                                 </Box>
@@ -68,6 +104,8 @@ const IndexTable: React.FC = () => {
                                                     px={4}
                                                     h={12}
                                                     alignItems="center"
+                                                    name="deleteData"
+                                                    onClick={handleDelete}
                                                 >
                                                     <DeleteIcon w={5} h={5} />
                                                 </Box>
