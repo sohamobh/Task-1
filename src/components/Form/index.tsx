@@ -18,7 +18,9 @@ import { display } from "features/display/displaySlice"
 
 import TodoValidationSchema from "Validation"
 
-const IndexForm: React.FC = () => {
+import { v4 as uuidv4 } from "uuid"
+
+const IndexForm: React.FC = (type) => {
     const dispatch = useDispatch()
     const StatusOptions = {
         CREATE: "Create",
@@ -32,29 +34,25 @@ const IndexForm: React.FC = () => {
                 email: "",
                 title: "",
                 desc: "",
-                status: "",
+                status: "Create",
             },
             validationSchema: TodoValidationSchema,
             onSubmit: (values) => {
-                dispatch(
-                    display({
-                        email: values.email,
-                        title: values.title,
-                        desc: values.desc,
-                        status: values.status,
-                    })
-                )
+                const id = uuidv4()
+                dispatch(display({ ...values, id }))
                 if (values) {
                     resetForm()
                     console.log("clear")
                 }
-                // alert(JSON.stringify(values, null, 2))
+                //alert(JSON.stringify(values, null, 2))
+                alert(id)
             },
         })
     console.log({ errors, touched })
 
     return (
         <>
+            {console.log(values)}
             <Box display="flex" margin="95px">
                 <Container height="fit-content">
                     <FormControl>
@@ -167,7 +165,7 @@ const IndexForm: React.FC = () => {
                             width="80px"
                             onClick={() => handleSubmit()}
                         >
-                            Save
+                            {type === "edit" ? "Edit" : "Save"}
                         </Button>
                     </FormControl>
                 </Container>

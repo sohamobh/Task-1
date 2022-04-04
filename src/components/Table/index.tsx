@@ -8,31 +8,47 @@ import {
     Td,
     TableContainer,
     Box,
-    Input,
 } from "@chakra-ui/react"
 
 import { useDispatch, useSelector } from "react-redux"
 
 import { formDataSelector } from "features/display/displaySelector"
-import { useState } from "react"
-import TodoValidationSchema from "Validation"
 import { useFormik } from "formik"
+import { v4 as uuidv4 } from "uuid"
+
 import { display } from "features/display/displaySlice"
 
-const IndexTable: React.FC = () => {
+import TodoValidationSchema from "Validation"
+import { idText } from "typescript"
+export interface editData {
+    newData: {
+        id: string
+        email: string
+        title: string
+        desc: string
+        status: string
+    }[]
+}
+const IndexTable: React.FC = (type) => {
+    const handleEdit = (id: string) => {
+        alert(id)
+        // const found = id.find((element: any) => element === id)
+    }
     const dispatch = useDispatch()
-    const { touched, errors, setFieldValue, values, handleSubmit, resetForm } =
-        useFormik({
-            initialValues: {
-                email: "",
-                title: "",
-                desc: "",
-                status: "",
-            },
-            validationSchema: TodoValidationSchema,
-            onSubmit: (values) => {
+    const { touched, errors, resetForm } = useFormik({
+        initialValues: {
+            id: uuidv4(),
+            email: "",
+            title: "",
+            desc: "",
+            status: "",
+        },
+        validationSchema: TodoValidationSchema,
+        onSubmit: (values) => {
+            if (type === "add") {
                 dispatch(
                     display({
+                        id: values.id,
                         email: values.email,
                         title: values.title,
                         desc: values.desc,
@@ -45,15 +61,21 @@ const IndexTable: React.FC = () => {
                     console.log("clear")
                 }
                 // alert(JSON.stringify(values, null, 2))
-            },
-        })
+                alert(values.id)
+            }
+            if (type === "edit") {
+                console.log("updatingggg")
+            }
+        },
+    })
+
     console.log({ errors, touched })
-    const [edit, setEdit] = useState<boolean>(false)
-    const [editData, setEditData] = useState<object>({})
 
     const tableData = useSelector(formDataSelector)
+
     const handleDelete = () => {
         alert("delete is clicked using fucntion")
+        dispatch(delete tableData.id)
     }
 
     return (
@@ -72,13 +94,13 @@ const IndexTable: React.FC = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {tableData.map((tableData) => {
+                                {tableData.map((item) => {
                                     return (
-                                        <Tr>
-                                            <Td>{tableData.email}</Td>
-                                            <Td>{tableData.title}</Td>
-                                            <Td>{tableData.desc}</Td>
-                                            <Td>{tableData.status}</Td>
+                                        <Tr key={item.id}>
+                                            <Td>{item.email}</Td>
+                                            <Td>{item.title}</Td>
+                                            <Td>{item.desc}</Td>
+                                            <Td>{item.status}</Td>
 
                                             <Td>
                                                 <Box
@@ -91,7 +113,7 @@ const IndexTable: React.FC = () => {
                                                     alignItems="center"
                                                     marginRight={4}
                                                     onClick={() => {
-                                                        alert("edit is clicked")
+                                                        handleEdit(item.id)
                                                     }}
                                                 >
                                                     <EditIcon w={5} h={5} />
